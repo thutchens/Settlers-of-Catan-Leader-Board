@@ -3,6 +3,9 @@ name := "play-java-spring"
 version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
+  cache,
+  filters,
+  javaJdbc,
   javaCore,
   javaWs % "test",
   "com.h2database" % "h2" % "1.4.181",
@@ -13,7 +16,10 @@ libraryDependencies ++= Seq(
   "org.springframework" % "spring-expression" % "4.1.1.RELEASE",
   "org.springframework" % "spring-aop" % "4.1.1.RELEASE",
   "org.springframework" % "spring-test" % "4.1.1.RELEASE" % "test",
-  "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final"
+  "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
+  "ch.qos.logback.contrib" % "logback-json-core"    % "0.1.2" % "runtime",
+  "ch.qos.logback.contrib" % "logback-json-classic" % "0.1.2" % "runtime",
+  "ch.qos.logback.contrib" % "logback-jackson"      % "0.1.2" % "runtime"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)

@@ -2,15 +2,23 @@ package controllers;
 
 
 import models.Bar;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
+
 import services.BarService;
+
 import views.html.index;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @org.springframework.stereotype.Controller
 public class Application {
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private BarService barService;
@@ -23,11 +31,12 @@ public class Application {
         Form<Bar> form = Form.form(Bar.class).bindFromRequest();
         Bar bar = form.get();
         barService.addBar(bar);
+        log.info("Bar Added");
         return play.mvc.Controller.redirect(controllers.routes.Application.index());
     }
 
     public Result listBars() {
         return play.mvc.Controller.ok(Json.toJson(barService.getAllBars()));
     }
-    
+
 }
