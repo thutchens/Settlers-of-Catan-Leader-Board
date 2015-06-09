@@ -31,9 +31,6 @@ public class DataConfig {
         entityManagerFactory.setPackagesToScan("models");
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.setDataSource(dataSource());
-        entityManagerFactory.setJpaPropertyMap(new HashMap<String, String>(){{
-            put("hibernate.hbm2ddl.auto", "create-drop");
-        }});
         entityManagerFactory.afterPropertiesSet();
         return entityManagerFactory.getObject();
     }
@@ -50,6 +47,8 @@ public class DataConfig {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Play.application().configuration().getString("db.default.driver"));
         dataSource.setUrl(Play.application().configuration().getString("db.default.url"));
+        dataSource.setUsername(Play.application().configuration().getString("db.default.user"));
+        dataSource.setPassword(Play.application().configuration().getString("db.default.password"));
         return dataSource;
     }
 
