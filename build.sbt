@@ -25,3 +25,5 @@ libraryDependencies ++= Seq(
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.27"
+
+libraryDependencies += "org.webjars" % "bootstrap" % "2.1.1"

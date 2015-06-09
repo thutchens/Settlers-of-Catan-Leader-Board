@@ -12,6 +12,7 @@ import play.mvc.Result;
 import services.BarService;
 
 import views.html.index;
+import views.html.leader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,10 @@ public class Application {
 
     public Result index() {
         return play.mvc.Controller.ok(index.render(Form.form(Bar.class)));
+    }
+
+    public Result leader() {
+        return play.mvc.Controller.ok(leader.render(Form.form(Bar.class)));
     }
 
     public Result addBar() {
