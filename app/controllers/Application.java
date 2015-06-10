@@ -13,6 +13,7 @@ import services.BarService;
 
 import views.html.index;
 import views.html.leader;
+import views.html.add;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,12 +33,16 @@ public class Application {
         return play.mvc.Controller.ok(leader.render(Form.form(Bar.class)));
     }
 
+    public Result addPlayer() {
+        return play.mvc.Controller.ok(add.render(Form.form(Bar.class)));
+    }
+
     public Result addBar() {
         Form<Bar> form = Form.form(Bar.class).bindFromRequest();
         Bar bar = form.get();
         barService.addBar(bar);
         log.info("Bar Added");
-        return play.mvc.Controller.redirect(controllers.routes.Application.index());
+        return play.mvc.Controller.redirect(controllers.routes.Application.addPlayer());
     }
 
     public Result listBars() {

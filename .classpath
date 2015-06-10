@@ -70,6 +70,8 @@
 	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar"/>
 	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.27.jar"/>
+	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/org.webjars/bootstrap/jars/bootstrap-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/org.webjars/jquery/jars/jquery-1.8.2.jar"/>
 	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/ch.qos.logback.contrib/logback-json-core/jars/logback-json-core-0.1.2.jar"/>
 	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/ch.qos.logback.contrib/logback-json-classic/jars/logback-json-classic-0.1.2.jar"/>
 	<classpathentry kind="lib" path="/Users/rarmstrong/.ivy2/cache/ch.qos.logback.contrib/logback-jackson/jars/logback-jackson-0.1.2.jar"/>
