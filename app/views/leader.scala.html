@@ -1,5 +1,5 @@
 @* leader Template File *@
-@(form: play.data.Form[Bar])
+@()
 
 @main("Catan Leader Board") {
     <div class="navbar navbar-fixed-top">
@@ -25,10 +25,10 @@
             <th>Win Percentage</th>
           </tr>
         </thead>
-        <tbody id="bars"></tbody>
+        <tbody id="players"></tbody>
     </table>
 
-    <script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/leader.js")" type="text/javascript"></script>
 
     </div>
 

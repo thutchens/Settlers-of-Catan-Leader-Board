@@ -1,6 +1,5 @@
 package models;
 
-
 import play.data.validation.Constraints;
 
 import javax.persistence.Column;
@@ -10,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bar")
-public class Bar {
+@Table(name="player")
+public class Player {
 
     @Id
     @GeneratedValue
@@ -23,11 +22,11 @@ public class Bar {
 
     @Constraints.Required(message = "The number of wins is required")
     @Column(name = "wins")
-    private int wins;
+    private Integer wins;
 
     @Constraints.Required(message = "Total games played is required")
     @Column(name = "games")
-    private int games;
+    private Integer games;
 
     public int getId() {
         return id;
@@ -59,6 +58,11 @@ public class Bar {
 
     public void setGames(int games) {
         this.games = games;
+    }
+
+    @Override
+    public String toString() {
+        return "name = " + name + ", wins = " + wins + ", games = " + games;
     }
 
 }
