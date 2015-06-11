@@ -8,13 +8,13 @@
             <div class="span4">
               @helper.form(action = routes.Application.addPlayer) {
                   <div class="form-group">
-                    @helper.inputText(form("Name"), 'id -> "name", 'validatorMessage -> "message.name")
+                    @helper.inputText(field = form("name"))
                   </div>
                   <div class="form-group">
-                    @helper.inputText(form("Wins"), 'id -> "wins", 'validatorMessage -> "message.wins")
+                    @helper.inputText(field = form("wins"))
                   </div>
                   <div class="form-group">
-                    @helper.inputText(form("Games"), 'id -> "games", 'validatorMessage -> "message.games")
+                    @helper.inputText(field = form("games"))
                   </div>
                   <input type="submit"/>
                 }

@@ -13,10 +13,6 @@ public class PlayerForm {
     @Required(message="player.games")
     private Integer games;
 
-    public PlayerForm(){
-
-    }
-
     public String getName() {
         return name;
     }
@@ -29,7 +25,7 @@ public class PlayerForm {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWins(Integer wins) {
         this.wins = wins;
     }
 
@@ -37,7 +33,7 @@ public class PlayerForm {
         return games;
     }
 
-    public void setGames(int games) {
+    public void setGames(Integer games) {
         this.games = games;
     }
 

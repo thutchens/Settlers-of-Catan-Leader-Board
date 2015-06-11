@@ -1,7 +1,5 @@
 package models;
 
-import play.data.validation.Constraints.Required;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,15 +15,12 @@ public class Player {
     private int id;
 
     @Column(name = "name")
-    @Required(message="player.name")
     private String name;
 
     @Column(name = "wins")
-    @Required(message="player.wins")
     private Integer wins;
 
     @Column(name = "games")
-    @Required(message="player.games")
     private Integer games;
 
     public int getId() {
