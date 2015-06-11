@@ -1,36 +1,30 @@
 @* add Template File *@
-@(form: play.data.Form[Player])
+@(form: play.data.Form[PlayerForm], error: String)
 
 @main("Catan Leader Board") {
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a id="titleLink" class="brand" href="/">Home</a>
-                <ul class="nav navbar-nav">
-                    <li><a href="@routes.Application.leader">Leader Board</a></li>
-                    <li><a href="@routes.Application.addPlayer">Add Player</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <div class="container">
         <div class="row">
             <div class="span4">
               @helper.form(action = routes.Application.addPlayer) {
                   <div class="form-group">
-                    @helper.inputText(form("Name"), 'id -> "name")
+                    @helper.inputText(form("Name"), 'id -> "name", 'validatorMessage -> "message.name")
                   </div>
                   <div class="form-group">
-                    @helper.inputText(form("Wins"), 'id -> "wins")
+                    @helper.inputText(form("Wins"), 'id -> "wins", 'validatorMessage -> "message.wins")
                   </div>
                   <div class="form-group">
-                    @helper.inputText(form("Games"), 'id -> "games")
+                    @helper.inputText(form("Games"), 'id -> "games", 'validatorMessage -> "message.games")
                   </div>
                   <input type="submit"/>
                 }
             </div>
             <div class="span8">
+                <h1>Enter Player Data</h1>
+                <p>Welcome to the Settlers of Catan Leader Board. Enter the name you prefer to be known by in the name field.
+                 Your wins can not be greater than your games played. If you try this, you are dumb and a liar. Have a wonderful day!</p>
+
+                 <h3>@error</h3>
             </div>
         </div>
     </div>

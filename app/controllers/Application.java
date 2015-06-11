@@ -1,54 +1,64 @@
 package controllers;
 
 import models.Player;
+import models.PlayerForm;
 
 import services.PlayerService;
-
-import views.html.add;
-import views.html.index;
-import views.html.leader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Result;
 
+import views.html.index;
+import views.html.add;
+import views.html.leader;
+
 @org.springframework.stereotype.Controller
-public class Application {
+public class Application extends play.mvc.Controller {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private PlayerService playerService;
 
     public Result index() {
-        return play.mvc.Controller.ok(index.render());
+        return ok(index.render());
     }
 
     public Result leader() {
-        return play.mvc.Controller.ok(leader.render());
+        return ok(leader.render());
     }
 
     public Result addToPlayer() {
-        return play.mvc.Controller.ok(add.render(Form.form(Player.class)));
+        return ok(add.render(Form.form(PlayerForm.class),""));
     }
 
     public Result addPlayer() {
-        Form<Player> form = Form.form(Player.class).bindFromRequest();
+        Form<PlayerForm> form = Form.form(PlayerForm.class).bindFromRequest();
         if (form.hasErrors()) {
             log.error("Error during player entry");
-            return play.mvc.Controller.badRequest(add.render(form));
+            return badRequest(add.render(form,"Error during player entry"));
         }
-        Player player = form.get();
+        PlayerForm player = form.get();
         if (player.getWins() > player.getGames()) {
             log.error("Wins can't be larger than games played");
-            return play.mvc.Controller.badRequest(add.render(form));
+            return badRequest(add.render(form,"Wins can't be larger than games played"));
         } else {
-            playerService.addPlayer(player);
+            Player play = new Player();
+            play.setGames(player.getGames());
+            play.setWins(player.getWins());
+            play.setName(player.getName());
+            playerService.addPlayer(play);
             log.info("Player Added '{}'", player);
-            return play.mvc.Controller.redirect(controllers.routes.Application.addPlayer());
+            return ok(add.render(Form.form(PlayerForm.class),"Successfully added a player!"));
         }
+    }
+
+    public Result listPlayers() {
+        return ok(Json.toJson(playerService.getAllPlayers()));
     }
 
 }

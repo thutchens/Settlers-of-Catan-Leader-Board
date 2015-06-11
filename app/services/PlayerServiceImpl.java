@@ -18,16 +18,12 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Transactional
     @Override
-    public void addPlayer(Player bar) {
-        em.persist(bar);
+    public void addPlayer(Player player) {
+        em.persist(player);
     }
 
     @Override
     public List<Player> getAllPlayers() {
-        /*CriteriaQuery<Bar> c = em.getCriteriaBuilder().createQuery(Bar.class);
-        c.from(Bar.class);
-        return em.createQuery(c).getResultList();*/
-
         return em.createQuery("from Player order by wins desc",Player.class).getResultList();
     }
 

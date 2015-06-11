@@ -2,38 +2,19 @@ package models;
 
 import play.data.validation.Constraints.Required;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class PlayerForm {
 
-@Entity
-@Table(name="player")
-public class Player {
-
-    @Id
-    @GeneratedValue
-    private int id;
-
-    @Column(name = "name")
     @Required(message="player.name")
     private String name;
 
-    @Column(name = "wins")
     @Required(message="player.wins")
     private Integer wins;
 
-    @Column(name = "games")
     @Required(message="player.games")
     private Integer games;
 
-    public int getId() {
-        return id;
-    }
+    public PlayerForm(){
 
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -44,7 +25,7 @@ public class Player {
         this.name = name;
     }
 
-    public int getWins() {
+    public Integer getWins() {
         return wins;
     }
 
@@ -52,7 +33,7 @@ public class Player {
         this.wins = wins;
     }
 
-    public int getGames() {
+    public Integer getGames() {
         return games;
     }
 

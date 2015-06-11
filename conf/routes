@@ -12,5 +12,8 @@ GET     /leader                     @controllers.Application.leader
 GET     /add                        @controllers.Application.addToPlayer
 POST    /add                        @controllers.Application.addPlayer
 
+# List Player page
+GET     /list                       @controllers.Application.listPlayers
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
