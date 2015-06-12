@@ -4,22 +4,17 @@ import play.data.validation.Constraints.Required;
 
 public class PlayerForm {
 
-    @Required(message="player.name")
-    private String name;
+    @Required(message="player.firstName")
+    private String firstName;
+
+    @Required(message="player.lastName")
+    private String lastName;
 
     @Required(message="player.wins")
     private Integer wins;
 
     @Required(message="player.games")
     private Integer games;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Integer getWins() {
         return wins;
@@ -37,9 +32,25 @@ public class PlayerForm {
         this.games = games;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
-        return "name = " + name + ", wins = " + wins + ", games = " + games;
+        return "name = " + firstName + " " + lastName + ", wins = " + wins + ", games = " + games;
     }
 
 }

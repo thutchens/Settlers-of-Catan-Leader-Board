@@ -1,30 +1,38 @@
 @* add Template File *@
-@(form: play.data.Form[PlayerForm], error: String)
+@(form: play.data.Form[PlayerForm])
 
 @main("Catan Leader Board") {
 
     <div class="container">
         <div class="row">
             <div class="span4">
+            @if(form.hasGlobalErrors) {
+                          <div class="alert alert-danger">
+                            <p class="small">
+                              <span class="error">@Messages(form.globalError.message)</span>
+                            </p>
+                          </div>
+                }
               @helper.form(action = routes.Application.addPlayer) {
                   <div class="form-group">
-                    @helper.inputText(field = form("name"))
+                    @helper.inputText(field = form("firstName"), '_showConstraints -> false, 'placeholder -> "Your First Name", '_label -> "First Name")
                   </div>
                   <div class="form-group">
-                    @helper.inputText(field = form("wins"))
+                    @helper.inputText(field = form("lastName"), '_showConstraints -> false, 'placeholder -> "Your Last Name", '_label -> "Last Name")
                   </div>
                   <div class="form-group">
-                    @helper.inputText(field = form("games"))
+                    @helper.inputText(field = form("wins"), '_showConstraints -> false, 'placeholder -> "Your Wins", '_label -> "Wins")
                   </div>
-                  <input type="submit"/>
+                  <div class="form-group">
+                    @helper.inputText(field = form("games"), '_showConstraints -> false, 'placeholder -> "Your Games Played", '_label -> "Games")
+                  </div>
+                  <button class="btn btn-primary btn-maincta" type="submit">Submit</button>
                 }
             </div>
             <div class="span8">
                 <h1>Enter Player Data</h1>
                 <p>Welcome to the Settlers of Catan Leader Board. Enter the name you prefer to be known by in the name field.
                  Your wins can not be greater than your games played. If you try this, you are dumb and a liar. Have a wonderful day!</p>
-
-                 <h3>@error</h3>
             </div>
         </div>
     </div>

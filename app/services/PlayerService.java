@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PlayerService {
 
-    void addPlayer(Player player);
+    boolean addPlayer(Player player);
     List<Player> getAllPlayers();
 
 }

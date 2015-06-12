@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Service
@@ -18,8 +19,16 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Transactional
     @Override
-    public void addPlayer(Player player) {
-        em.persist(player);
+    public boolean addPlayer(Player player) {
+        try {
+            Player p = null;
+            p = em.createQuery("SELECT p FROM Player p WHERE p.firstName LIKE :firstName and p.lastName LIKE :lastName", Player.class)
+                            .setParameter("firstName", player.getFirstName()).setParameter("lastName", player.getLastName()).getSingleResult();
+        } catch (NoResultException e) {
+            em.persist(player);
+            return true;
+        }
+        return false;
     }
 
     @Override

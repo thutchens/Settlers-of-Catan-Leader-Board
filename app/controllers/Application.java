@@ -33,28 +33,31 @@ public class Application extends play.mvc.Controller {
     }
 
     public Result addToPlayer() {
-        return ok(add.render(Form.form(PlayerForm.class), ""));
+        return ok(add.render(Form.form(PlayerForm.class)));
     }
 
     public Result addPlayer() {
         Form<PlayerForm> form = Form.form(PlayerForm.class).bindFromRequest();
         if (form.hasErrors()) {
-            log.error("Error during player entry");
-            return badRequest(add.render(form, "Error during player entry"));
+            return badRequest(add.render(form));
         }
         PlayerForm player = form.get();
         if (player.getWins() > player.getGames()) {
-            log.error("Wins can't be larger than games played");
-            return badRequest(add.render(form, "Wins can't be larger than games played"));
-        } else {
-            Player play = new Player();
-            play.setGames(player.getGames());
-            play.setWins(player.getWins());
-            play.setName(player.getName());
-            playerService.addPlayer(play);
-            log.info("Player Added '{}'", player);
-            return ok(add.render(Form.form(PlayerForm.class), "Successfully added a player!"));
+            form.reject("invalid.entry");
+            return badRequest(add.render(form));
         }
+        Player play = new Player();
+        play.setGames(player.getGames());
+        play.setWins(player.getWins());
+        play.setFirstName(player.getFirstName());
+        play.setLastName(player.getLastName());
+        boolean b = playerService.addPlayer(play);
+        if (b == false) {
+            form.reject("invalid.double");
+            return badRequest(add.render(form));
+        }
+        log.info("Player Added '{}'", player);
+        return ok(add.render(Form.form(PlayerForm.class)));
     }
 
     public Result listPlayers() {

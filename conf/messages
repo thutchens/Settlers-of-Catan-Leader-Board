@@ -1,3 +1,10 @@
+#Field messages
 player.wins=Invalid Number of Wins
 player.games=Invalid Number of Games
-player.name=Invalid Name
+player.firstName=First name required.
+player.lastName=Last name required.
+
+#Invaild Input
+invalid.entry=Wins cannot be greater than games played!
+invalid.blank=All fields need to be filled out!
+invalid.double=Player already exists in the database!

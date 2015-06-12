@@ -1,5 +1,5 @@
 import configs.AppConfig;
-import models.Bar;
+import models.Player;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -7,13 +7,13 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import static org.fest.assertions.Assertions.assertThat;
 
 @ContextConfiguration(classes={AppConfig.class, TestDataConfig.class})
-public class BarTest extends AbstractTransactionalJUnit4SpringContextTests {
- 
+public class PlayerTest extends AbstractTransactionalJUnit4SpringContextTests {
+
     @Test
-    public void setBarName() {
-        Bar bar = new Bar();
-        bar.name = "foo";
-        assertThat(bar.name).isEqualTo("foo");
+    public void setPlayerName() {
+        Player player = new Player();
+        player.setName("foo");
+        assertThat(player.getName()).isEqualTo("foo");
     }
 
 }

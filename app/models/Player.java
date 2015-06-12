@@ -14,8 +14,11 @@ public class Player {
     @GeneratedValue
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "lastName")
+    private String lastName;
 
     @Column(name = "wins")
     private Integer wins;
@@ -31,33 +34,41 @@ public class Player {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public int getWins() {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getWins() {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWins(Integer wins) {
         this.wins = wins;
     }
 
-    public int getGames() {
+    public Integer getGames() {
         return games;
     }
 
-    public void setGames(int games) {
+    public void setGames(Integer games) {
         this.games = games;
     }
 
     @Override
     public String toString() {
-        return "name = " + name + ", wins = " + wins + ", games = " + games;
+        return "name = " + firstName + " " + lastName + ", wins = " + wins + ", games = " + games;
     }
 
 }
