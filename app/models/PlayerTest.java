@@ -1,9 +1,10 @@
+package models;
 import configs.AppConfig;
-import models.Player;
+import configs.TestDataConfig;
+
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-
 import static org.fest.assertions.Assertions.assertThat;
 
 @ContextConfiguration(classes={AppConfig.class, TestDataConfig.class})

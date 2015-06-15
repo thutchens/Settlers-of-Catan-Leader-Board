@@ -1,10 +1,10 @@
+package services;
 import static org.fest.assertions.Assertions.assertThat;
 
 import configs.AppConfig;
+import configs.TestDataConfig;
 
 import models.Player;
-
-import services.PlayerService;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
