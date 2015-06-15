@@ -5,6 +5,10 @@ import models.PlayerForm;
 
 import services.PlayerService;
 
+import views.html.add;
+import views.html.index;
+import views.html.leader;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
-
-import views.html.index;
-import views.html.add;
-import views.html.leader;
 
 @org.springframework.stereotype.Controller
 public class Application extends play.mvc.Controller {
