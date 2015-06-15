@@ -20,7 +20,9 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public boolean addPlayer(Player player) {
         List<Player> p = em.createQuery("from Player where firstName = :pfirstName and lastName = :plastName", Player.class)
-                        .setParameter("pfirstName", player.getFirstName()).setParameter("plastName", player.getLastName()).getResultList();
+                           .setParameter("pfirstName", player.getFirstName())
+                           .setParameter("plastName", player.getLastName())
+                           .getResultList();
         if (p.isEmpty()) {
             em.persist(player);
             return true;
@@ -30,7 +32,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> getAllPlayers() {
-        return em.createQuery("from Player order by wins desc",Player.class).getResultList();
+        return em.createQuery("from Player order by wins desc", Player.class).getResultList();
     }
 
 }

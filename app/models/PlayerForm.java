@@ -4,16 +4,16 @@ import play.data.validation.Constraints.Required;
 
 public class PlayerForm {
 
-    @Required(message="player.firstName")
+    @Required(message = "player.firstName")
     private String firstName;
 
-    @Required(message="player.lastName")
+    @Required(message = "player.lastName")
     private String lastName;
 
-    @Required(message="player.wins")
+    @Required(message = "player.wins")
     private Integer wins;
 
-    @Required(message="player.games")
+    @Required(message = "player.games")
     private Integer games;
 
     public Integer getWins() {
