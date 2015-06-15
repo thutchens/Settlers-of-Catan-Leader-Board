@@ -1,4 +1,5 @@
 package controllers;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static play.mvc.Http.Status.OK;
 import static play.mvc.Http.Status.SEE_OTHER;
@@ -16,6 +17,10 @@ import static play.test.Helpers.testServer;
 
 import models.PlayerForm;
 
+import views.html.add;
+import views.html.index;
+import views.html.leader;
+
 import org.junit.Test;
 
 import play.data.Form;
@@ -28,14 +33,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import views.html.index;
-import views.html.add;
-import views.html.leader;
-
 // todo: not using the right spring context when using fakeApplication()
 public class ApplicationTest {
 
-/*    @Test
+    @Test
     public void indexTemplate() {
         running(fakeApplication(), new Runnable() {
             public void run() {
@@ -107,6 +108,6 @@ public class ApplicationTest {
                 assertThat(WS.url("http://localhost:9000/").get().get(5, TimeUnit.SECONDS).getStatus()).isEqualTo(OK);
             }
         });
-    } */
+    }
 
 }
