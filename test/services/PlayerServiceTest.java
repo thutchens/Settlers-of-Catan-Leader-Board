@@ -1,4 +1,6 @@
 package services;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.running;
 import static org.fest.assertions.Assertions.assertThat;
 
 import configs.AppConfig;
@@ -21,17 +23,25 @@ public class PlayerServiceTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void createPlayer() {
-        Player player = new Player();
-        player.setName("foo");
-        playerService.addPlayer(player);
-        assertThat(player.getId()).isNotNull();
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Player player = new Player();
+                player.setFirstName("foo");
+                playerService.addPlayer(player);
+                assertThat(player.getId()).isNotNull();
+            }
+        });
     }
 
     @Test
     public void getPlayers() {
-        createPlayer();
-        List<Player> players = playerService.getAllPlayers();
-        assertThat(players.size()).isEqualTo(1);
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                createPlayer();
+                List<Player> players = playerService.getAllPlayers();
+                assertThat(players.size()).isEqualTo(1);
+            }
+        });
     }
 
 }

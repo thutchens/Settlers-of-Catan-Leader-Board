@@ -4,6 +4,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static play.mvc.Http.Status.OK;
 import static play.mvc.Http.Status.SEE_OTHER;
 import static play.test.Helpers.GET;
+import static play.test.Helpers.BAD_REQUEST;
 import static play.test.Helpers.callAction;
 import static play.test.Helpers.charset;
 import static play.test.Helpers.contentAsString;
@@ -15,16 +16,12 @@ import static play.test.Helpers.running;
 import static play.test.Helpers.status;
 import static play.test.Helpers.testServer;
 
-import models.PlayerForm;
-
 import views.html.add;
 import views.html.index;
 import views.html.leader;
 
 import org.junit.Test;
 
-import play.data.Form;
-import play.libs.ws.WS;
 import play.mvc.Result;
 import play.test.FakeRequest;
 import play.twirl.api.Html;
@@ -49,24 +46,29 @@ public class ApplicationTest {
 
     @Test
     public void callIndex() {
-        Result result = callAction(controllers.routes.ref.Application.index());
-        assertThat(status(result)).isEqualTo(OK);
-        assertThat(contentType(result)).isEqualTo("text/html");
-        assertThat(charset(result)).isEqualTo("utf-8");
-        assertThat(contentAsString(result)).contains("Settlers of Catan Leader Board");
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(controllers.routes.ref.Application.index());
+                assertThat(status(result)).isEqualTo(OK);
+                assertThat(contentType(result)).isEqualTo("text/html");
+                assertThat(charset(result)).isEqualTo("utf-8");
+                assertThat(contentAsString(result)).contains("Settlers of Catan Leader Board");
+            }
+        });
     }
 
     @Test
     public void callAddPlayer() {
         running(fakeApplication(), new Runnable() {
             public void run() {
-                Map<String, String> formParams = new HashMap<String, String>();
-                formParams.put("name", "foo");
+                Map<String, String> formParams = new HashMap<>();
+                formParams.put("firstName", "foo");
+                formParams.put("lastName", "foo");
 
                 FakeRequest fakeRequest = fakeRequest().withFormUrlEncodedBody(formParams);
 
                 Result result = callAction(controllers.routes.ref.Application.addPlayer(), fakeRequest);
-                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(status(result)).isEqualTo(BAD_REQUEST);
             }
         });
     }
@@ -75,18 +77,10 @@ public class ApplicationTest {
     public void callListPlayer() {
         running(fakeApplication(), new Runnable() {
             public void run() {
-                Map<String, String> formParams = new HashMap<String, String>();
-                formParams.put("name", "foo");
-
-                FakeRequest fakeRequest = fakeRequest().withFormUrlEncodedBody(formParams);
-
-                callAction(controllers.routes.ref.Application.addToPLayer(), fakeRequest);
-
                 Result result = callAction(controllers.routes.ref.Application.listPlayers());
                 assertThat(status(result)).isEqualTo(OK);
                 assertThat(contentType(result)).isEqualTo("application/json");
                 assertThat(contentAsString(result)).startsWith("[");
-                assertThat(contentAsString(result)).contains("foo");
             }
         });
     }
@@ -97,15 +91,6 @@ public class ApplicationTest {
             public void run() {
                 Result result = route(fakeRequest(GET, "/leader"));
                 assertThat(result).isNotNull();
-            }
-        });
-    }
-
-    @Test
-    public void realBarsRequest() {
-        running(testServer(9000), new Runnable() {
-            public void run() {
-                assertThat(WS.url("http://localhost:9000/").get().get(5, TimeUnit.SECONDS).getStatus()).isEqualTo(OK);
             }
         });
     }
