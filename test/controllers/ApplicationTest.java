@@ -1,10 +1,9 @@
 package controllers;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static play.mvc.Http.Status.BAD_REQUEST;
 import static play.mvc.Http.Status.OK;
-import static play.mvc.Http.Status.SEE_OTHER;
 import static play.test.Helpers.GET;
-import static play.test.Helpers.BAD_REQUEST;
 import static play.test.Helpers.callAction;
 import static play.test.Helpers.charset;
 import static play.test.Helpers.contentAsString;
@@ -14,7 +13,6 @@ import static play.test.Helpers.fakeRequest;
 import static play.test.Helpers.route;
 import static play.test.Helpers.running;
 import static play.test.Helpers.status;
-import static play.test.Helpers.testServer;
 
 import views.html.add;
 import views.html.index;
@@ -28,7 +26,6 @@ import play.twirl.api.Html;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 // todo: not using the right spring context when using fakeApplication()
 public class ApplicationTest {
