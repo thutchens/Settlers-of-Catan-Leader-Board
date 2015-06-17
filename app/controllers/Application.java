@@ -36,7 +36,7 @@ public class Application extends play.mvc.Controller {
         return ok(add.render(Form.form(PlayerForm.class)));
     }
 
-    public Result addPlayer() {
+    public Result addPlayer() throws Exception {
         Form<PlayerForm> form = Form.form(PlayerForm.class).bindFromRequest();
         if (form.hasErrors()) {
             return badRequest(add.render(form));
@@ -46,13 +46,9 @@ public class Application extends play.mvc.Controller {
             form.reject("invalid.entry");
             return badRequest(add.render(form));
         }
-        Player play = new Player();
-        play.setGames(player.getGames());
-        play.setWins(player.getWins());
-        play.setFirstName(player.getFirstName());
-        play.setLastName(player.getLastName());
-        boolean b = playerService.addPlayer(play);
-        if (b == false) {
+        Player play = new Player(player.getFirstName(), player.getLastName(), player.getWins(), player.getGames());
+        boolean playerIsUnique = playerService.addPlayer(play);
+        if (playerIsUnique == false) {
             form.reject("invalid.double");
             return badRequest(add.render(form));
         }

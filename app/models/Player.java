@@ -26,6 +26,18 @@ public class Player {
     @Column(name = "games")
     private Integer games;
 
+    public Player() {
+
+    }
+
+    public Player(String firstName, String lastName, Integer wins, Integer games) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.wins = wins;
+        this.games = games;
+    }
+
     public int getId() {
         return id;
     }

@@ -19,6 +19,13 @@ public class PlayerServiceImpl implements PlayerService {
     @Transactional
     @Override
     public boolean addPlayer(Player player) {
+        if (player == null ||
+            player.getFirstName() == null || player.getFirstName().trim().length() == 0 ||
+            player.getLastName() == null || player.getLastName().trim().length() == 0 ||
+            player.getWins() == null ||
+            player.getGames() == null) {
+            return false;
+        }
         List<Player> p = em.createQuery("from Player where firstName = :pfirstName and lastName = :plastName", Player.class)
                            .setParameter("pfirstName", player.getFirstName())
                            .setParameter("plastName", player.getLastName())

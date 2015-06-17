@@ -22,17 +22,63 @@ public class PlayerServiceTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void createPlayer() {
-        Player play = new Player();
-        play.setFirstName("foo");
-        playerService.addPlayer(play);
+        Player play = new Player("foo", "foo", 100, 100);
+        assertThat(playerService.addPlayer(play)).isTrue();
         assertThat(play.getId()).isNotNull();
     }
 
     @Test
+    public void createEmptyPlayer() {
+        Player play = new Player();
+        assertThat(playerService.addPlayer(play)).isFalse();
+    }
+
+    @Test
+    public void createNullPlayer() {
+        assertThat(playerService.addPlayer(null)).isFalse();
+    }
+
+    @Test
+    public void createNoFirstNamePlayer() {
+        Player play = new Player(null, "foo", 100, 100);
+        assertThat(playerService.addPlayer(play)).isFalse();
+    }
+
+    @Test
+    public void createNoLastNamePlayer() {
+        Player play = new Player("foo", null, 100, 100);
+        assertThat(playerService.addPlayer(play)).isFalse();
+    }
+
+    @Test
+    public void createNoWinsPlayer() {
+        Player play = new Player("foo", "foo", null, 100);
+        assertThat(playerService.addPlayer(play)).isFalse();
+    }
+
+    @Test
+    public void createNoGamesPlayer() {
+        Player play = new Player("foo", "foo", 100, null);
+        assertThat(playerService.addPlayer(play)).isFalse();
+    }
+
+    @Test
+    public void createNoNamesPlayer() {
+        Player play = new Player("", "", 100, 100);
+        assertThat(playerService.addPlayer(play)).isFalse();
+    }
+
+    @Test
     public void getPlayers() {
-        createPlayer();
+        Player play = new Player("foo", "foo", 100, 100);
+        assertThat(playerService.addPlayer(play)).isTrue();
         List<Player> players = playerService.getAllPlayers();
         assertThat(players.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void getNoPlayers() {
+        assertThat(playerService.getAllPlayers().size()).isEqualTo(0);
     }
 
 }
